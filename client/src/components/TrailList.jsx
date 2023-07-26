@@ -21,15 +21,15 @@ function TrailList({trails}) {
   console.log(trails)
   
     const gridCards = trails.map((trail) => (
-      <Grid item key={trail.id} trail={trail}>
+      <Grid item xs={3} key={trail.id} trail={trail}>
         <TrailCard key={trail.id} trail={trail}/>
         {/* <Item><TrailCard key={trail.id} trail={trail}/></Item> */}
       </Grid>
  
       )); 
   return (
-    <Box padding={2}>
-      <Grid container spacing={4}>
+    // <Box padding={2}>
+      <Grid  container >
        
         {gridCards}
         {/* {trails.from(trails(6)).map((trail) => (
@@ -39,7 +39,7 @@ function TrailList({trails}) {
         ))} */}
        
       </Grid>
-    </Box>
+    // </Box>
   );
 }
 export default TrailList;

@@ -15,8 +15,8 @@ function TrailCard({ trail }) {
     const review_number = trail.trail_reviews.length
 
     return (
-      <Container>
-      <Card sx={{ maxWidth: 345 }}>
+      <Container className= "card-margin-top">
+      <Card sx={{ minWidth: 345, minHeight: 425 }}>
       <CardActionArea>
         <CardMedia
           component="img"

@@ -9,6 +9,7 @@ import {useTheme, useMediaQuery, Grid, Fade, } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SpaIcon from '@mui/icons-material/Spa';
 import { red } from '@mui/material/colors';
+import logo from './../Logos/Happy.png'
 
 // import { Link, useNavigate, NavLink } from "react-router-dom"
 
@@ -50,14 +51,13 @@ function NavBar({updateAdventurer, adventurer, search, handleSearch}) {
 
 /****NAV CONST*******************************************************************/
 
-const home = <NavLink to = "/home"> Home </NavLink>
+const home = <NavLink to = "/home"> Explore </NavLink>
 const safety = <NavLink to = "/safety"> Safety </NavLink>
 /* const new_rev = <NavLink to = "/trail_reviews"> New Review </NavLink> */
 /* const profile = <NavLink exact to = "/adventurers"> Adventure Profile </NavLink> */
-const take_hike = <NavLink to = "/trails"> Take a Hike </NavLink>
+const take_hike = <NavLink to = "/trails"> Recommended Hikes </NavLink>
 // const login = <NavLink className="button" to= "/login"> Log In </NavLink>
 // const signup = <NavLink className="button" to= "/signup"> Sign Up </NavLink>
-const search_bar  = <Search search={search} handleSearch={handleSearch}/>
 
 const hiked_trails = <NavLink to = "/hiked_trails"> Your Hiked Trails </NavLink>
 const see_hiked_trails = adventurer ? ({hiked_trails}) : ("")
@@ -66,10 +66,14 @@ const in_or_out =  adventurer ?
             (                    
               <Button onClick={handleLogOut} className="button" > Log Out </Button>
             ) : (
-             <Grid item sx={2}>
+              <>
+             <Grid item sx={1}  marginRight={2}>
                 <Button component={Link} to='/login' size="small" color="secondary" variant = "contained"> Login </Button>
+              </Grid>
+              <Grid item sx={1} >
                 <Button component={Link} to='/signup' size="small" color="secondary" variant = "contained"> Signup </Button>
               </Grid>
+              </>
              )
 
 
@@ -83,13 +87,14 @@ const in_or_out =  adventurer ?
   return (
     <>
     <AppBar>
-      <Toolbar>
-            <Grid container sx={{marginLeft: "center"}} spacing={2}>
-              <Grid item xs={2}>
-                {search_bar}
+      <Toolbar className="App-header">
+            <Grid container sx={{ placeItems: 'center'}} spacing={2}>
+              <img className ="logo-margin-top" src={logo} height={80}/>
+              <Grid item xs={1.5}>
+                <Search search={search} handleSearch={handleSearch}/>
               </Grid>
 
-              <Grid item xs={8}>
+              <Grid item xs={7} color="secondary" >
                 <Tabs  indicatorColor="secondary" textColor="secondary" value={value} onChange={(e, val)=>setValue(val)}>
                     {/*<Tab label= {profile}/> */}
                     <Tab label= {home}/>

@@ -68,3 +68,29 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.page{
+  margin-top: 150px;
+}
+
+.forms{
+  margin-top: 150px;
+  margin-left: 150px
+}
+
+.logo-margin-top{
+  margin-top: 0px;
+}
+.card-margin-top{
+  margin-bottom: 35px;
+}
+
+.App-header {
+  
+  height: 80px;
+  /* background-image: url("../public/micelio.png"); */
+  /* background-position: 50% 0% ; */
+  /* background-repeat: no-repeat;
+  background-size: 400px; */
+  margin-top: 25px;
+}
