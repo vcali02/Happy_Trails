@@ -21,23 +21,23 @@ function TrailList({trails}) {
   console.log(trails)
   
     const gridCards = trails.map((trail) => (
-      <Grid item xs={2} sm={4} md={4} key={trail.id} trail={trail}>
+      <Grid item key={trail.id} trail={trail}>
         <TrailCard key={trail.id} trail={trail}/>
         {/* <Item><TrailCard key={trail.id} trail={trail}/></Item> */}
       </Grid>
  
       )); 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        <Grid item>
+    <Box padding={2}>
+      <Grid container spacing={4}>
+       
         {gridCards}
         {/* {trails.from(trails(6)).map((trail) => (
           <Grid item xs={2} sm={4} md={4} key={trail.id} trail={trail}>
             <Item> <TrailCard /></Item>
           </Grid>
         ))} */}
-        </Grid>
+       
       </Grid>
     </Box>
   );

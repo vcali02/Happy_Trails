@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, CardActionArea, CardActions, Box } from '@mui/material';
+import { Button, Container, CardActionArea, CardActions, Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -15,6 +15,7 @@ function TrailCard({ trail }) {
     const review_number = trail.trail_reviews.length
 
     return (
+      <Container>
       <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
@@ -45,10 +46,11 @@ function TrailCard({ trail }) {
       </CardActionArea>
       <CardActions>
         <Button size="medium" color="primary" alt="Mark as hiked">
-          <HikingIcon/> or <AddLocationAltOutlinedIcon/>
+          <HikingIcon/> I hiked it!
         </Button>
       </CardActions>
     </Card>
+    </Container>
   );
 }
 

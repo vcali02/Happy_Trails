@@ -51,14 +51,13 @@ class Adventurer(db.Model, SerializerMixin):
 
     # #SERIALIZE RULES
     serialize_rules = (
-         "-trails_list.trails",
          "-trail_reviews.adventurer",
-         "-hiked_trails.adventurer",
-         "-trails_list.adventurers",
-         "-trails_list.hiked_trails",
-         "-_password_hash",
-         "-trail_reviews"
+         "-hiked_trails.adventurer"
      )
+    
+    # def serialize_hiked_trails(self):
+    #     return [trail.serialize() for trail in self.hiked_trails]
+
 
     #VALIDATIONS
     @validates("name")
@@ -100,11 +99,20 @@ class HikedTrail(db.Model, SerializerMixin):
     adventurer = db.relationship('Adventurer', back_populates='hiked_trails')
     trail = db.relationship('Trail', back_populates='hiked_trails')
 
-    #SERIALIZER
-    serialize_rules = (
-        "-adventurer.hiked_trails",
-        "-trail.hiked_trails",
-        "-trail.trail_reviews", "-trail.location_id", "-trail.description")
+    @property
+    def serialize(self):
+        return {
+            "id": self.id,
+            "date": self.date,
+            "adventurer_id": self.adventurer_id,
+            "trail_name": self.trail.name
+        }
+        
+    # # SERIALIZER
+    # serialize_rules = (
+    #     "-adventurer.hiked_trails",
+    #     "-trail.hiked_trails"
+    #     )
     
     #VALIDATIONS
     @validates("date")
@@ -147,7 +155,7 @@ class Trail(db.Model, SerializerMixin):
 
     #SERIALIZE RULES
     serialize_rules =(
-        "-hiked_trails.trail",
+        "-hiked_trails",
         "-trail_reviews.trail",
         "-location.trails_list",
         "-trail_reviews.adventurer",
@@ -158,8 +166,6 @@ class Trail(db.Model, SerializerMixin):
         "-location.id",
         "-trail_reviews.trail_id",
         "-trail_reviews.id",
-        
-
     )
    
     #VALIDATION
@@ -212,8 +218,8 @@ class Location(db.Model, SerializerMixin):
     #SERIALIZER
     serialize_rules = (
         "-trails_list.location",
-        "-trails_list.trail_reviews",
-        "-trails_list.hiked_trails"
+        # "-trails_list.trail_reviews",
+        # "-trails_list.hiked_trails"
     )
 
 

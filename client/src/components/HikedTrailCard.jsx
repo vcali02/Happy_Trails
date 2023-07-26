@@ -1,10 +1,17 @@
 import React from 'react'
+import {Card, Grid, CardContent, CardActions, IconButton, CardMedia, Typography } from '@mui/material'
 
-function HikedTrailCard() {
+function HikedTrailCard( {trail} ) {
+  const {trail_name, date} = trail
   return (
-    <div>HikedTailCard
-       
-    </div>
+    <>
+    <Card>
+      <CardContent>
+        <Typography>{trail_name}</Typography>
+        <Typography>{date}</Typography>
+      </CardContent>
+    </Card>
+    </>
   )
 }
 
