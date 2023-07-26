@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import {useNavigate} from "react-router-dom"
 import LoginForm from "./LoginForm";
-import { FormControl, TextField, Box, Button, Typography, InputLabel } from '@mui/material';
+import { Paper, FormControl, TextField, Box, Button, Typography, InputLabel } from '@mui/material';
 //should be adventurer form
 
 
@@ -142,69 +142,85 @@ function SignupForm({updateAdventurer}){
 //         </section>
 //     )
 // }
+// <Box
+// component="form"
+// sx={{
+// '& .MuiTextField-root': { m: 1, width: '25ch' },
+// }}>
 
-
-    <Box
-    component="form"
-    sx={{
-    '& .MuiTextField-root': { m: 1, width: '25ch' },
-    }}>
-    <Typography>{signup ? "Not a member?" : "Already have an Account?"}</Typography>
+<section className="forms">
+    <Box marginBottom={2}>
+    <Typography gutterBottom variant="h5" component="div" color="text.secondary">
+        {signup ? "Already have an Account?" : "Not a member?"}
+    </Typography>
+    </Box>
+    <Box marginBottom={2}>
+    <Button onClick={toggleSignup} textColor="secondary" variant="outlined">
+        {signup ? "Login" : "Sign Up"}
+ 	</Button>
+    </Box>
+    <Box>
     {signup ? (
-        <FormControl onSubmit={formik.handleSubmit}>
-            <div>
+        <form onSubmit={formik.handleSubmit} >
+           <div>
             <TextField
             required
             id="outlined-required"
-            label="Name"
+            placeholder="Name"
             defaultValue="Hello World"
             type="text" 
             name="name"
-            variant="filled" 
+            variant="filled"
             onChange={formik.handleChange}
             value={formik.values.name}
             onBlur={formik.handleBlur}
         />
+        </div>
+        <div>
         {formik.touched.name && formik.errors.name ? (
                 <h3>{formik.errors.name}</h3>
                 ) : ("")}
-            </div>
-            <div>
+           
             <TextField
             type="text"
             name="username"
-            label="Username*"
+            placeholder="Username*"
             variant="filled"
             onChange={formik.handleChange}
             value={formik.values.username}
             onBlur={formik.handleBlur}
         />
+        </div>
+        <div>
         {formik.touched.username && formik.errors.username ? (
                 <h3>{formik.errors.username}</h3>
                 ) : ("")}
-            </div>
+            
             <TextField
             type="text"
             name="email"
-            label="Email"
+            placeholder="Email"
             variant="filled" 
             onChange={formik.handleChange}
             value={formik.values.email}
             onBlur={formik.handleBlur}
         />
+        </div>
+        <div>
         {formik.touched.email && formik.errors.email ? (
                 <h3>{formik.errors.email}</h3>
                 ) : ("")}
             <TextField
             type="password" 
             name="password"
-            label="Password"
+            placeholder="Password"
             variant="filled"
             onChange={formik.handleChange}
             value={formik.values.password}
             onBlur={formik.handleBlur}
         />
-        {formik.touched.password && formik.errors.password ? (
+        </div>
+        {/* {formik.touched.password && formik.errors.password ? (
                 <h3>{formik.errors.password}</h3>
                 ) : ("")}
             <TextField
@@ -217,8 +233,8 @@ function SignupForm({updateAdventurer}){
                 onChange={formik.handleChange}
                 value={formik.values.bio}
                 onBlur={formik.handleBlur}
-            />
-            {formik.touched.password && formik.errors.password ? (
+            /> */}
+            {/* {formik.touched.password && formik.errors.password ? (
                 <h3>{formik.errors.password}</h3>
                 ) : ("")}
             <TextField
@@ -232,14 +248,15 @@ function SignupForm({updateAdventurer}){
             />
             {formik.touched.image && formik.errors.image ? (
                 <h3>{formik.errors.image}</h3>
-                ) : ("")}    
-        </FormControl>
+                ) : ("")}     */}
+            <Button color="secondary" variant="outlined" sx={{margin: 3}} placeholder="Join!" type="submit">Join!</Button>
+           
+        </form>
      ) : ( <LoginForm updateAdventurer={updateAdventurer}/>)}
 					
-    <Button onClick={toggleSignup}>
-                {signup ? "Sign Up" : "Login"}
- 	</Button>
+    
     </Box>
+    </section>
    
    )
 }

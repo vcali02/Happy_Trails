@@ -9,6 +9,7 @@ import {Routes, Route } from 'react-router-dom'
 import { Box, Grid, Container } from '@mui/material';
 import AdventurerContainer from "./AdventurerContainer";
 import LoginForm from './LoginForm';
+import Footer from './Footer'
 
 function App() {
   const [adventurers, setAdventurers] = useState([]);
@@ -63,7 +64,7 @@ function App() {
 
   
   return (
-    <div>
+    <div className = "page">
         <NavBar updateAdventurer={updateAdventurer} adventurer={adventurer} search={search} handleSearch={handleSearch}/>
         <Grid>
         <Routes>
@@ -77,6 +78,7 @@ function App() {
           <Route path="/login" element={<LoginForm updateAdventurer={updateAdventurer} />} />
         </Routes>
         </Grid>
+        <Footer/>
     </div>
   )}
 
