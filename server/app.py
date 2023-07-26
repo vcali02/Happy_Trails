@@ -10,8 +10,12 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from flask_bcrypt import Bcrypt
-
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+import traceback
 app = Flask(__name__)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 # bcrypt = Bcrypt(app) ## not sure what this is - it was from the lecture 
 
@@ -37,7 +41,9 @@ CORS(app)
 def index():
     return '<h1>Happy Trails</h1>'
 
-
+@login_manager.user_loader
+def load_user(user_id):
+    return Adventurer.query.filter(Adventurer.id == user_id).first()
 ###############################
 ##THIS NEEDS TO BE TESTED######
 ###############################
@@ -72,7 +78,8 @@ class Login(Resource):
         password = request.get_json()['password']
 
         if adventurer.authenticate(password):
-            session['adventurer_id'] = adventurer.id
+            login_user(adventurer, remember=True)
+            # session['adventurer_id'] = adventurer.id
             return adventurer.to_dict(), 200
         
         return {'Invalid Credentials'}, 401
@@ -81,9 +88,9 @@ api.add_resource(Login, '/login')
 
 # #-----LOGOUT------------#
 class Logout(Resource):
-     def get(self):
-         session['adventurer_id'] = None
-         return make_response({"204":"No Content"},204)
+     def post(self):
+         logout_user()
+         return 'Goodbye!', 200
         
 
 api.add_resource(Logout, '/logout')       
@@ -92,17 +99,14 @@ api.add_resource(Logout, '/logout')
 class AuthorizeSession(Resource):
     def get(self):
          try:
-             adventurer = Adventurer.query.filter_by(
-              id = session.get('adventurer_id')).first()
+             if current_user.is_authenticated:
+                 adventurer = current_user
+            #  adventurer = Adventurer.query.filter_by(
+            #   id = session.get('adventurer_id')).first()
              return make_response(adventurer.to_dict(), 200)
          except:
              return make_response({}, 401)
         
-
-               
-   
-  
-
 api.add_resource(AuthorizeSession, '/authorize_session')
      
 
@@ -126,39 +130,9 @@ class Adventurers(Resource):
           
 
 api.add_resource(Adventurers, '/adventurers')
-#POST /adventurers
-#make a new user
- #   def post(self):
-
-        #1. data
- #       data = request.get_json()
-  #      try:
-            #2. instance
-   #         new_adventurer = Adventurer(
-    #            name = data.get("name"),
-     #           username = data.get("username"),
-      #          email = data.get("email"),
-       #         password = data.get("password"),
-        #        bio = data.get("bio"),
-         #       image = data.get("image"),
-          #  )
-            #3. add/commit
-           # db.session.add(new_adventurer)
-            #db.session.commit()
-            #4. dict
-            #new_adventurer_dict = new_adventurer.to_dict()
-            #5. res
-            #res = make_response(
-             #   new_adventurer_dict,
-              #  201
-           # )
-            #return res
-        #except:
-         #   return {"400": "Adventurer Creation Unsuccessful"}, 400
-
-#api
 
 
+#-----------------USER to GET and UPDATE profile-----------------------#
 #GET /adventurers/<int:id>
 #get one user
 class OneAdventurer(Resource):
@@ -166,15 +140,13 @@ class OneAdventurer(Resource):
         adventurer = Adventurer.query.filter_by(id=id).first()
         if not adventurer:
             return {"404": "Adventurer Not Found"}, 404
-        
+         
         res = make_response(
             adventurer.to_dict(only=('id', 'name', 'username', 'bio', 'image')),
             200
         )
         return res
  
-
-        
 #PATCH /adventurers/<int:id>
 #edit/update one user
     def patch(self, id):
@@ -196,11 +168,6 @@ class OneAdventurer(Resource):
             except:
                 return make_response({"400": "Adventurer Update Unsuccessful."}, 400)
         
-       
-
-
-
-######ERROR FIXED - WAS NOT DELETING####
 ####IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint failed:
 		# hiked_trails.adventurer_id
 		# [SQL: UPDATE hiked_trails SET adventurer_id=? WHERE hiked_trails.id = ?]
@@ -224,7 +191,7 @@ api.add_resource(OneAdventurer, "/adventurers/<int:id>")
 
 
 
-#---TRAILS-----------------------------#
+#-------------------TRAILS-----------------------------#
 class Trails(Resource):
     def get(self):
         trails = Trail.query.all()
@@ -262,7 +229,7 @@ class OneTrail(Resource):
         return make_response(one_trail.to_dict(only = ("id","name", "image","altitude", "description", "difficulty", "distance", "location", "trail_reviews", "image")), 200)
 
 api.add_resource(OneTrail, '/trails/<int:id>')    
-# #---TRAILS-----------------------------#
+# #----------------TRAILS-----------------------------#
 
 
 
@@ -271,20 +238,23 @@ api.add_resource(OneTrail, '/trails/<int:id>')
 #get list of trails that have been hiked
 
 class HikedTrails(Resource):
-    def get(self):
+    def get(self, id):
+        # only = ("date", "trail")
         try:
-            hiked_trails = HikedTrail.query.all()
-            hiked_trails_dict = [h.to_dict(only = ("date", "trail")) for h in hiked_trails]
+            hiked_trails = HikedTrail.query.filter(HikedTrail.adventurer_id==id).all()
+            hiked_trails_dict = [h.serialize for h in hiked_trails]
             res = make_response(
                 hiked_trails_dict,
                 200
             )
             return res
-        except:
-            return {"404": "Hiked Trails Not Found"}, 404
+        except Exception as e:
+            traceback.print_exc()
+            return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
 
-api.add_resource(HikedTrails, "/hiked_trails")
+api.add_resource(HikedTrails, "/hiked_trails/<int:id>")
 
+#----------------------SINGLE HIKED TRAIL--------------------------------#
 #GET /hiked_trails/<int:id>
 #get individual trail that has been hiked
 class OneHikedTrail(Resource):

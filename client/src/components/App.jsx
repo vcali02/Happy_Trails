@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import "./App.css"
 import NavBar from "./NavBar";
 import TrailList from "./TrailList";
 import Safety from "./Safety"
@@ -7,7 +6,7 @@ import SignupForm from './SignupForm';
 import AddReview from "./AddReview"
 import HikedTrailsList from "./HikedTrailsList"
 import {Routes, Route } from 'react-router-dom'
-import { Box, Container } from '@mui/material';
+import { Box, Grid, Container } from '@mui/material';
 import AdventurerContainer from "./AdventurerContainer";
 import LoginForm from './LoginForm';
 
@@ -16,10 +15,10 @@ function App() {
   const [trails, setTrails] = useState([]); // Initialize to empty array
   const [search, setSearch] = useState('')
   const [adventurer, setAdventurer] = useState(null)
+  console.log(adventurer)
 
   useEffect(() => {
     getTrails();
-    getAdventurers();
     getAdventurer();
   }, []);
 
@@ -29,13 +28,15 @@ function App() {
       .then(data => setTrails(data))
       .catch((error) => console.error('Error:', error));
   }
+//GETS ALL ADVENTURERS FOR FUTURE FRIEND FEATURE
+  // function getAdventurers() {
+  //   fetch('/api/adventurers')
+  //     .then(res => res.json())
+  //     .then(data => setAdventurers(data))
+  //     .catch((error) => console.error('Error:', error));
+  // }
 
-  function getAdventurers() {
-    fetch('/api/adventurers')
-      .then(res => res.json())
-      .then(data => setAdventurers(data))
-      .catch((error) => console.error('Error:', error));
-  }
+  //get user's information - pass down to profile and to hiked_trails
 
   function getAdventurer() {
     fetch('/api/authorize_session')
@@ -64,7 +65,7 @@ function App() {
   return (
     <div>
         <NavBar updateAdventurer={updateAdventurer} adventurer={adventurer} search={search} handleSearch={handleSearch}/>
-        <Box>
+        <Grid>
         <Routes>
           <Route path="/home" element={<TrailList trails={filteredTrails}/>}/>
           <Route path="/safety" element={<Safety />} />
@@ -72,10 +73,10 @@ function App() {
           <Route path="/trail_reviews" element={<AddReview />} />
           {/* <Route path="/adventurers" element={<AdventurerContainer adventurers={adventurers}/>} /> */}
           <Route path="/trails" element={<TrailList trails={trails}/>} />
-          <Route path="/hiked_trails" element={<HikedTrailsList />} />
+          <Route path="/hiked_trails" element={<HikedTrailsList adventurer={adventurer}/>} />
           <Route path="/login" element={<LoginForm updateAdventurer={updateAdventurer} />} />
         </Routes>
-        </Box>
+        </Grid>
     </div>
   )}
 

@@ -67,15 +67,15 @@ function handleChange(e) {
 // </div>
 //     </div>
 
-    <Box
-    sx={{
-      backgroundColor: 'primary.dark',
-      '&:hover': {
-        backgroundColor: 'primary.main',
-        opacity: [0.9, 0.8, 0.7],
-      },
-    }}>
-      <Toolbar>
+    // <Box
+    // sx={{
+    //   backgroundColor: 'primary.dark',
+    //   '&:hover': {
+    //     backgroundColor: 'primary.main',
+    //     opacity: [0.9, 0.8, 0.7],
+    //   },
+    // }}>
+   
         <SearchBar>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -89,10 +89,9 @@ function handleChange(e) {
                 onChange={(e) => handleChange(e)}
               />
         </SearchBar>
-        <Button>Search</Button>
-      </Toolbar>
-    </Box>
-  )
-}
-
-export default Search
+    // </Box>
+    )
+  }
+  
+  export default Search
+  {/* <Button sx={2}>GO!</Button> */}
