@@ -34,7 +34,7 @@ function LoginForm({updateAdventurer}){
                   validationSchema: schema,
                 
                   onSubmit: (values, actions) => {
-                      fetch( "/login", {
+                      fetch( "/api/login", {
                           method: "POST",
                           headers: {
                               "content-type" : "application/json"

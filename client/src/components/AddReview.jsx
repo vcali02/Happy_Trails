@@ -35,7 +35,7 @@ function AddReview() {
       validationSchema: schema,
       //submit callback
       onSubmit: (values) => {
-          fetch("/trail_reviews", {
+          fetch("/api/trail_reviews", {
               method: "POST",
               headers: {
                   "content-type" : "application/json"

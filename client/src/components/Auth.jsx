@@ -39,7 +39,7 @@ function Auth(){
         validationSchema: schema,
       //submit callback
         onSubmit: (values) => {
-            fetch("/login", {
+            fetch("/api/login", {
                 method: "POST",
                 headers: {
                     "content-type" : "application/json"

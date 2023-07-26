@@ -37,7 +37,7 @@ function SignupForm({updateAdventurer}){
         validationSchema: schema,
       //submit callback
         onSubmit: (values, actions) => {
-            fetch(signup ? "/signup" : "/login", {
+            fetch(signup ? "/api/signup" : "/api/login", {
                 method: "POST",
                 headers: {
                     "content-type" : "application/json"
@@ -48,7 +48,7 @@ function SignupForm({updateAdventurer}){
                     res.json().then(adventurer => {
                     actions.resetForm() 
                     updateAdventurer(adventurer) 
-                        navigate("/")
+                        // navigate("/home")
                     })
                 } else{
                     res.json().then((error) => setError(error.message));
@@ -151,8 +151,7 @@ function SignupForm({updateAdventurer}){
     }}>
     <Typography>{signup ? "Not a member?" : "Already have an Account?"}</Typography>
     {signup ? (
-        <FormControl onSubmit={formik.handleSubmit}
-        >
+        <FormControl onSubmit={formik.handleSubmit}>
             <div>
             <TextField
             required
