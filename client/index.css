@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  * {
+  
+      font-family: "Arial";
+    }
+    
+    h1 {
+      background-color: #f3f7f8;
+      color: #9f6457;
+    }
+    
+    .logo {
+      width: 140px;
+      height: auto;
+      float: left;
+      margin-right: 10px;
+      background-color: #9f6457;
+    }
+    
+    header {
+      background-color: #9f6457;
+      color: #fefefe;
+    }
+    
+    .root {
+      background-color: #9f6457;
+      color: #fefefe;
+    }
+    
+    body {
+      background-color: #fefefe;
+      color: #9f6457;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .search {
+      width: 50%;
+      text-align: center;
+      position: relative;
+      display: block;
+      margin: auto;
+      padding: 2rem;
+    }
+    
+    .searchTerm {
+      text-align: center;
+      width: 100%;
+      border: 3px solid #990033;
+      padding: 5px;
+      height: 3rem;
+      border-radius: 5px;
+      outline: none;
+      font-size: 1.5rem;
+    }
+    
+    .image-container {
+      display: flex;
+      justify-content: center;
+     
+      vertical-align: middle;
+      background-color: #fefefe;
+    }
+    
+    .image-container img {
+      max-width: 100%;
+    
+      margin: 20px;
+      
+      background-color: #fefefe;
+    }
+    
+    .btn {
+      background-color: white;
+      color: #696969;
+    }
+    
+    .btn--block {
+      display: block;
+      width: 100%;
+    }
+    
+    .trailcard {
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      grid-gap: 1rem; 
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .cards__item {
+      display: flex;
+      padding: 1rem;
+      
+    }
+    
+    .ul {
+      background-color: white;
+      border-radius: 0.25rem;
+      box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .trailcard {
+      font-size: 10px; 
+    }
+    
+    #main-header {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      height: 10rem;
+      border-radius: 30%;
+      opacity: 80%;
+    }
+    
+    .centered {
+      text-align: center;
+    }
+  
+    
+    
+    
+    
+    
+    
+  
