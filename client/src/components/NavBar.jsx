@@ -1,9 +1,6 @@
 import React from 'react'
 import { NavLink, useNavigate } from "react-router-dom"
 import { AppBar, Avatar, Tooltip, Button, Container, Toolbar, Typography, Box, IconButton, Menu, MenuItem } from '@mui/material';
-import AdbIcon from '@mui/icons-material/Adb';
-import MenuIcon from '@mui/icons-material/Menu';
-import LoginForm from './LoginForm';
 import Search from './Search';
 
 // import { Link, useNavigate, NavLink } from "react-router-dom"
@@ -16,11 +13,11 @@ function NavBar({updateAdventurer, adventurer, search, handleSearch}) {
   const navigate = useNavigate()
 
   function handleLogOut () {
-    fetch('/logout')
+    fetch('/api/logout')
     .then((response) => {
           if (response.ok) {
           updateAdventurer(null);
-          navigate('/App');
+          navigate('/home');
       }
 });
 }
@@ -28,13 +25,13 @@ function NavBar({updateAdventurer, adventurer, search, handleSearch}) {
   return (
     <div> Navigation
         <nav>
-          <NavLink exact to = "/home"> Home </NavLink>
-          <NavLink exact to = "/safety"> Safety </NavLink>
-          <NavLink exact to = "/trail_reviews"> New Review </NavLink>
-          <NavLink exact to = "/adventurers"> Adventure Profile </NavLink>
-          <NavLink exact to = "/trails"> Take a Hike </NavLink>
-          <NavLink exact to = "/hiked_trails"> Your Hiked Trails </NavLink>
-          <NavLink exact to = "/signup"> Signup </NavLink>
+          <NavLink to = "/home"> Home </NavLink>
+          <NavLink to = "/safety"> Safety </NavLink>
+          {/* <NavLink to = "/trail_reviews"> New Review </NavLink> */}
+          {/* <NavLink exact to = "/adventurers"> Adventure Profile </NavLink> */}
+          <NavLink to = "/trails"> Take a Hike </NavLink>
+         {adventurer ? (<NavLink to = "/hiked_trails"> Your Hiked Trails </NavLink>) : ("")} 
+          {/* <NavLink to = "/signup"> Signup </NavLink> */}
           
           { adventurer ?
                       (<>                     
@@ -43,7 +40,7 @@ function NavBar({updateAdventurer, adventurer, search, handleSearch}) {
                       </button>
                       </>) : 
                       <button>
-                        <NavLink className="button" exact to = "/login"> Log In </NavLink>
+                        <NavLink className="button" to= "/login"> Log In </NavLink>
                       </button>
                       
           }

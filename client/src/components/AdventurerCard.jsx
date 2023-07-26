@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import { Card, CardActionArea, CardMedia, CardContent, Typography, Button, CardActions } from '@mui/material'
-import HikingIcon from '@material-ui/icons'
 
 function AdventurerCard({adventurer}) {
   return (
