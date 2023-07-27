@@ -5,6 +5,7 @@ from sqlalchemy import MetaData
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from config import db, bcrypt
+from flask_login import UserMixin
 
 db = SQLAlchemy() 
 metadata = MetaData(naming_convention={
@@ -13,7 +14,7 @@ metadata = MetaData(naming_convention={
 db = SQLAlchemy(metadata=metadata)
 
 # Models go here!
-class Adventurer(db.Model, SerializerMixin):
+class Adventurer(db.Model, SerializerMixin, UserMixin):
     __tablename__ = "adventurers"
 
     id = db.Column(db.Integer, primary_key=True)

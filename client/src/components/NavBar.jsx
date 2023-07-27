@@ -60,7 +60,7 @@ const take_hike = <NavLink to = "/trails"> Recommended Hikes </NavLink>
 // const signup = <NavLink className="button" to= "/signup"> Sign Up </NavLink>
 
 const hiked_trails = <NavLink to = "/hiked_trails"> Your Hiked Trails </NavLink>
-const see_hiked_trails = adventurer ? ({hiked_trails}) : ("")
+// const see_hiked_trails = adventurer ? ({hiked_trails}) : ("")
 
 const logout = <NavLink to = "/home" onClick={handleLogOut}> Log out </NavLink>
 const in_or_out =  adventurer ?
@@ -103,9 +103,8 @@ const in_or_out =  adventurer ?
                     <Tab label= {home}/>
                     <Tab label= {safety}/>
                     <Tab label= {take_hike}/>
+                    {adventurer ? <Tab label={hiked_trails }/> : ("")}
                 </Tabs>
-                {see_hiked_trails}
-                
               </Grid>
               {in_or_out}
             </Grid>

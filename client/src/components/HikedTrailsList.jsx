@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import HikedTailCard from './HikedTrailCard'
+import { useParams } from 'react-router-dom'
 
 
 
 function HikedTrailsList({adventurer}) {
+  console.log(adventurer)
 const [hikedTrails, setHikedTrails] = useState([])
 
   useEffect(() => {
@@ -17,9 +19,11 @@ const [hikedTrails, setHikedTrails] = useState([])
   }
   console.log(hikedTrails)
 
+
+
   return (
     <div>
-      {[...hikedTrails].map(trail => <HikedTailCard key={trail.id} trail={trail} hikedTrails={hikedTrails} />)}
+      {[...hikedTrails].map(trail => <HikedTailCard key={trail.id} trail={trail}/>)}
     </div>
   )
 }

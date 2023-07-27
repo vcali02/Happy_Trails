@@ -6,10 +6,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import HikingIcon from '@mui/icons-material/Hiking';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
+import { Link } from 'react-router-dom'
+
+
 
 //add ternary for button to display depending on if hiked or not
 
-function TrailCard({ trail }) {
+function TrailCard({ trail, adventurer}) {
+    // const url = `/hiked_trails/${adventurer.id}`
+
     const { id, name, distance, difficulty, description, image } = trail;
     
     const review_number = trail.trail_reviews.length
@@ -45,9 +50,10 @@ function TrailCard({ trail }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="medium" color="primary" alt="Mark as hiked">
+{/* add ternary where if user is null, route to login page */}
+        {/* <Button component={Link} to={url} size="medium" color="primary" alt="Mark as hiked">
           <HikingIcon/> I hiked it!
-        </Button>
+        </Button> */}
       </CardActions>
     </Card>
     </Container>

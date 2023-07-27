@@ -37,7 +37,7 @@ function SignupForm({updateAdventurer}){
         validationSchema: schema,
       //submit callback
         onSubmit: (values, actions) => {
-            fetch(signup ? "/api/signup" : "/api/login", {
+            fetch(signup ? "/api/login" : "/api/signup", {
                 method: "POST",
                 headers: {
                     "content-type" : "application/json"
@@ -48,7 +48,7 @@ function SignupForm({updateAdventurer}){
                     res.json().then(adventurer => {
                     actions.resetForm() 
                     updateAdventurer(adventurer) 
-                        // navigate("/home")
+                        navigate("/home")
                     })
                 } else{
                     res.json().then((error) => setError(error.message));
