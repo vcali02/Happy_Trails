@@ -40,8 +40,9 @@ function NavBar({updateAdventurer, adventurer, search, handleSearch}) {
     }
 
   function handleLogOut () {
-    fetch('/api/logout')
-    .then((response) => {
+    fetch('/api/logout', {
+      method: 'POST',
+  }).then((response) => {
           if (response.ok) {
           updateAdventurer(null);
           navigate('/home');
@@ -50,7 +51,6 @@ function NavBar({updateAdventurer, adventurer, search, handleSearch}) {
 }
 
 /****NAV CONST*******************************************************************/
-
 const home = <NavLink to = "/home"> Explore </NavLink>
 const safety = <NavLink to = "/safety"> Safety </NavLink>
 /* const new_rev = <NavLink to = "/trail_reviews"> New Review </NavLink> */
@@ -62,12 +62,15 @@ const take_hike = <NavLink to = "/trails"> Recommended Hikes </NavLink>
 const hiked_trails = <NavLink to = "/hiked_trails"> Your Hiked Trails </NavLink>
 const see_hiked_trails = adventurer ? ({hiked_trails}) : ("")
 
+const logout = <NavLink to = "/home" onClick={handleLogOut}> Log out </NavLink>
 const in_or_out =  adventurer ?
             (                    
-              <Button onClick={handleLogOut} className="button" > Log Out </Button>
+              <Grid item sx={1}>
+              <Button component={Link} to='/signup' size="small" color="secondary" variant = "contained">{logout}</Button>
+              </Grid>
             ) : (
               <>
-             <Grid item sx={1}  marginRight={2}>
+             <Grid item sx={1}  >
                 <Button component={Link} to='/login' size="small" color="secondary" variant = "contained"> Login </Button>
               </Grid>
               <Grid item sx={1} >
@@ -94,7 +97,7 @@ const in_or_out =  adventurer ?
                 <Search search={search} handleSearch={handleSearch}/>
               </Grid>
 
-              <Grid item xs={7} color="secondary" >
+              <Grid item xs={6.5} color="secondary" >
                 <Tabs  indicatorColor="secondary" textColor="secondary" value={value} onChange={(e, val)=>setValue(val)}>
                     {/*<Tab label= {profile}/> */}
                     <Tab label= {home}/>

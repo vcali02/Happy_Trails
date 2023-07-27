@@ -3,16 +3,16 @@ import {Box, Paper, Typography} from '@mui/material';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import {
-    FaTwitter,
-    FaInstagram,
-    FaLinkedin,
-    FaGithub,
-    FaHome,
-    FaEnvelope,
-    FaPhone,
-    FaPrint,
-  } from "react-icons/fa";
+// import {
+//     FaTwitter,
+//     FaInstagram,
+//     FaLinkedin,
+//     FaGithub,
+//     FaHome,
+//     FaEnvelope,
+//     FaPhone,
+//     FaPrint,
+//   } from "react-icons/fa";
 
 function Footer() {
   return (
