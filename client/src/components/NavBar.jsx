@@ -70,11 +70,11 @@ const in_or_out =  adventurer ?
               </Grid>
             ) : (
               <>
-             <Grid item sx={1}  >
+             {/* <Grid item sx={1}  >
                 <Button component={Link} to='/login' size="small" color="secondary" variant = "contained"> Login </Button>
-              </Grid>
+              </Grid> */}
               <Grid item sx={1} >
-                <Button component={Link} to='/signup' size="small" color="secondary" variant = "contained"> Signup </Button>
+                <Button component={Link} to='/signup' size="small" color="secondary" variant = "contained"> Welcome </Button>
               </Grid>
               </>
              )
@@ -103,7 +103,8 @@ const in_or_out =  adventurer ?
                     <Tab label= {home}/>
                     <Tab label= {safety}/>
                     <Tab label= {take_hike}/>
-                    {adventurer ? <Tab label={hiked_trails }/> : ("")}
+                    {adventurer ? <Tab label={hiked_trails }/> 
+                    : ("")}
                 </Tabs>
               </Grid>
               {in_or_out}

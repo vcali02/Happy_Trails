@@ -14,7 +14,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-function TrailList({trails, adventurer}) {
+function TrailList({trails, adventurer, updateHikedTrails}) {
   // const trailCards = trails.map((trail) => (
   //   <TrailCard
   //   key={trail.id}
@@ -23,8 +23,12 @@ function TrailList({trails, adventurer}) {
   
     const gridCards = trails.map((trail) => (
       <Grid item xs={3} key={trail.id} trail={trail}>
-        <TrailCard key={trail.id} trail={trail}
-        adventurer={adventurer}/>
+        <TrailCard 
+        key={trail.id} 
+        trail={trail}
+        adventurer={adventurer}
+        updateHikedTrails={updateHikedTrails}
+        />
         {/* <Item><TrailCard key={trail.id} trail={trail}/></Item> */}
       </Grid>
  

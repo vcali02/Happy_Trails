@@ -15,6 +15,9 @@ function App() {
   const [trails, setTrails] = useState([]); // Initialize to empty array
   const [search, setSearch] = useState('')
   const [adventurer, setAdventurer] = useState(null)
+  const [hikedTrails, setHikedTrails] = useState([])
+
+
   console.log(adventurer)
 
   useEffect(() => {
@@ -37,6 +40,10 @@ function App() {
   // }
 
   //get user's information - pass down to profile and to hiked_trails
+
+  function updateHikedTrails(newTrail){
+    setHikedTrails([...hikedTrails, newTrail])
+  }
 
   function getAdventurer() {
     if (adventurer == null) {
@@ -70,14 +77,14 @@ function App() {
         <NavBar updateAdventurer={updateAdventurer} adventurer={adventurer} search={search} handleSearch={handleSearch}/>
         <Grid>
         <Routes>
-          <Route path="/home" element={<TrailList trails={filteredTrails} adventurer={adventurer}/>}/>
+          <Route path="/home" element={<TrailList trails={filteredTrails} adventurer={adventurer} updateHikedTrails={updateHikedTrails} hikedTrails={hikedTrails}/>}/>
           <Route path="/safety" element={<Safety />} />
           <Route path="/signup" element={<SignupForm updateAdventurer={updateAdventurer}/>} /> 
           <Route path="/trail_reviews" element={<AddReview />} />
           {/* <Route path="/adventurers" element={<AdventurerContainer adventurers={adventurers}/>} /> */}
           {/* <Route path="/trails" element={<TrailList trails={trails}/>} /> */}
-          <Route path="/hiked_trails/:id" element={<HikedTrailsList adventurer={adventurer}/>} />
-          <Route path="/login" element={<LoginForm updateAdventurer={updateAdventurer} adventurer={adventurer}/>} />
+          <Route path="/hiked_trails" element={<HikedTrailsList adventurer={adventurer} updateHikedTrails={updateHikedTrails} hikedTrails={hikedTrails}/>} />
+          {/* <Route path="/login" element={<LoginForm updateAdventurer={updateAdventurer} adventurer={adventurer}/>} /> */}
         </Routes>
         </Grid>
         <Footer/>

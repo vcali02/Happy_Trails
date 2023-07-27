@@ -89,9 +89,6 @@ class Login(Resource):
             traceback.print_exc()
             return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
 
-
-
-
 # class Login(Resource):
 #     def post(self):
 #         data = request.get_json()
@@ -107,11 +104,7 @@ class Login(Resource):
 #         except Exception as e:
 #             traceback.print_exc()
 #             return {"error": "An error occurred while logging in", "message": str(e)}, 500
-
-
-
-        
-            
+ 
 api.add_resource(Login, '/login')             
 
 # #-----LOGOUT------------#
@@ -282,6 +275,23 @@ class HikedTrails(Resource):
             return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
 
 api.add_resource(HikedTrails, "/hiked_trails/<int:id>")
+
+@app.route('/hiked_trail', methods=["POST"])
+def addHikedTrail():
+    data = request.get_json()
+    try:
+        new_hiked_trail = HikedTrail(
+            date = data.get("date"),
+            trail_id = data.get("trail_id"),
+            adventurer_id = data.get("adventurer_id")
+        )
+        db.session.add(new_hiked_trail)
+        db.session.commit()
+
+        return make_response(new_hiked_trail.serialize, 201)
+    except Exception as e:
+            traceback.print_exc()
+            return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
 
 #----------------------SINGLE HIKED TRAIL--------------------------------#
 #GET /hiked_trails/<int:id>
