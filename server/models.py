@@ -106,7 +106,8 @@ class HikedTrail(db.Model, SerializerMixin):
             "id": self.id,
             "date": self.date,
             "adventurer_id": self.adventurer_id,
-            "trail_name": self.trail.name
+            "trail_name": self.trail.name,
+            "trail_image" : self.trail.image
         }
         
     # # SERIALIZER
