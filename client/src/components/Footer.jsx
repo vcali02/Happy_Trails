@@ -17,7 +17,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 function Footer() {
   return (
     <Box >
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}
+      <Paper sx={{ bottom: 0, left: 0, right: 0}}  elevation={3}
       justifyContent="center"
       alignItems="center" 
       >

@@ -30,7 +30,7 @@ function AdventurerCard({adventurer}) {
         {adventurer.bio}
         </Typography>
         <Typography variant='h'>
-        Trails Hiked by this Adventurer {adventurer.hiked_trails}
+        {/* Trails Hiked by this Adventurer {adventurer.hiked_trails} */}
         </Typography>
         <Link to={`/adventurers/${adventurer.id}`}></Link>
       </CardContent>

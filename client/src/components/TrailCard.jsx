@@ -1,18 +1,40 @@
 import React from 'react'
-import { Button, Container, CardActionArea, CardActions, Box } from '@mui/material';
+import { Button, Container, CardActionArea, CardActions, Box, Divider } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import HikingIcon from '@mui/icons-material/Hiking';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
+import { Link } from 'react-router-dom'
+
+
 
 //add ternary for button to display depending on if hiked or not
 
-function TrailCard({ trail }) {
+function TrailCard({ trail, adventurer, updateHikedTrails}) {
+
     const { id, name, distance, difficulty, description, image } = trail;
     
     const review_number = trail.trail_reviews.length
+    const url = `/hiked_trails`
+    const url2 = '/signup'
+
+    function handleHikes(e, id, adventurer){
+      fetch(`/api/hiked_trails`, {
+        method: 'POST',
+        headers: {
+          "content-type":"application/json"
+        },
+        body: JSON.stringify({
+          trail_id: id,
+          adventurer_id: adventurer.id
+        }),
+      })
+      
+      .then(res => res.json())
+      .then(newTrail => updateHikedTrails(newTrail))
+    }
 
     return (
       <Container className= "card-margin-top">
@@ -44,10 +66,19 @@ function TrailCard({ trail }) {
       
         </CardContent>
       </CardActionArea>
+      <Divider/>
       <CardActions>
-        <Button size="medium" color="primary" alt="Mark as hiked">
+{/* add ternary where if user is null, route to login page */}
+      {adventurer ? 
+      <Button component={Link} to={url} onClick={(e) => handleHikes(e, id)}size="medium" color="primary" alt="Mark as hiked">
+      <HikingIcon/> I hiked it!
+    </Button>
+    :
+    <Button component={Link} to={url2} size="medium" color="primary" alt="Mark as hiked">
           <HikingIcon/> I hiked it!
         </Button>
+    }
+        
       </CardActions>
     </Card>
     </Container>

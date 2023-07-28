@@ -11,15 +11,21 @@ const Safety = () => {
     return (
         <div>
             {/* <img src={logo2}/> */}
-            
-            <Typography variant='h2'>Safety Tips:</Typography>
+
+            <Typography variant='h3'>Safety Tips:</Typography>
             <List>
                 <ListItem>
-                    <Typography variant=''>Outdoor Plan: </Typography>
-                Cell connectivity in many state park units is limited or non-existent. Tell a responsible person back at camp or at home where you are going and when you plan on returning. Ask that person to notify local law enforcement if you do not return on time.
+                    <Typography>
+                    <Typography sx={{fontWeight: 'bold'}}>Outdoor Plan:</Typography>
+                    Cell connectivity in many state park units is limited or non-existent. Tell a responsible person back at camp or at home where you are going and when you plan on returning. Ask that person to notify local law enforcement if you do not return on time.
+                    </Typography>
                 </ListItem>
                 <ListItem>
-                Hike with a friend or family member.  The companionship in the great outdoors is fun and you can encourage one another to meet your fitness goals.
+                    <Typography>
+                        <Typography sx={{fontWeight: 'bold'}}>Hike with a friend or family member. </Typography>
+                        The companionship in the great outdoors is fun and you can encourage one another to meet your fitness goals.
+                    </Typography>
+                 
                 </ListItem>
                 <ListItem>
                 Don’t walk off-trail. Do not walk off-trail or enter closed areas. Cutting across switchbacks erodes the hillside and eventually destroys the trail. Plus, walking off-trail increases your chance of suffering an injury or getting lost.

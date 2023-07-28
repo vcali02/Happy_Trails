@@ -12,10 +12,12 @@ import LoginForm from './LoginForm';
 import Footer from './Footer'
 
 function App() {
-  const [adventurers, setAdventurers] = useState([]);
   const [trails, setTrails] = useState([]); // Initialize to empty array
   const [search, setSearch] = useState('')
   const [adventurer, setAdventurer] = useState(null)
+  const [hikedTrails, setHikedTrails] = useState([])
+
+
   console.log(adventurer)
 
   useEffect(() => {
@@ -39,19 +41,26 @@ function App() {
 
   //get user's information - pass down to profile and to hiked_trails
 
+  function updateHikedTrails(newTrail){
+    setHikedTrails([...hikedTrails, newTrail])
+  }
+
   function getAdventurer() {
+    if (adventurer == null) {
     fetch('/api/authorize_session')
       .then(response => {
       if (response.ok) {
         response.json().then((adventurer) => setAdventurer(adventurer))}
        
       else  {setAdventurer(null)} 
+      
       })
+    }
   }
 
   //adds new adventurer to current adventurers on signup
    function updateAdventurer(adventurer) {
-        setAdventurers([...adventurers, adventurer])
+        setAdventurer(adventurer)
    } 
 
 
@@ -68,14 +77,14 @@ function App() {
         <NavBar updateAdventurer={updateAdventurer} adventurer={adventurer} search={search} handleSearch={handleSearch}/>
         <Grid>
         <Routes>
-          <Route path="/home" element={<TrailList trails={filteredTrails}/>}/>
+          <Route path="/home" element={<TrailList trails={filteredTrails} adventurer={adventurer} updateHikedTrails={updateHikedTrails} hikedTrails={hikedTrails}/>}/>
           <Route path="/safety" element={<Safety />} />
           <Route path="/signup" element={<SignupForm updateAdventurer={updateAdventurer}/>} /> 
           <Route path="/trail_reviews" element={<AddReview />} />
           {/* <Route path="/adventurers" element={<AdventurerContainer adventurers={adventurers}/>} /> */}
-          <Route path="/trails" element={<TrailList trails={trails}/>} />
-          <Route path="/hiked_trails" element={<HikedTrailsList adventurer={adventurer}/>} />
-          <Route path="/login" element={<LoginForm updateAdventurer={updateAdventurer} />} />
+          {/* <Route path="/trails" element={<TrailList trails={trails}/>} /> */}
+          <Route path="/hiked_trails" element={<HikedTrailsList adventurer={adventurer} updateHikedTrails={updateHikedTrails} hikedTrails={hikedTrails}/>} />
+          {/* <Route path="/login" element={<LoginForm updateAdventurer={updateAdventurer} adventurer={adventurer}/>} /> */}
         </Routes>
         </Grid>
         <Footer/>

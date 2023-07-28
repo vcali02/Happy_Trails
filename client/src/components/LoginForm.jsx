@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {useFormik} from "formik";
 import * as yup from "yup";
 import {useNavigate} from "react-router-dom"
+import { Paper, FormControl, TextField, Box, Button, Typography, InputLabel } from '@mui/material';
+
            
     
     
@@ -61,9 +63,10 @@ return(
           <section>
 
           <form onSubmit={formik.handleSubmit}>
-              <label> Username:
-              <input
+              <div>
+              <TextField
               type="text"
+              placeholder="username"
               name="username" 
               onChange={formik.handleChange}
               value={formik.values.username}
@@ -71,9 +74,10 @@ return(
               {formik.touched.username && formik.errors.username ? (
               <h3>{formik.errors.username}</h3>
               ) : ("")}
-              </label>
-              <label> Password
-              <input 
+              </div>
+              <div> 
+              <TextField
+              placeholder="password" 
                type="password" 
                name="password" 
                onChange={formik.handleChange}
@@ -82,8 +86,8 @@ return(
               {formik.touched.password && formik.errors.password ? (
                <h3>{formik.errors.password}</h3>
                ) : ("")}
-              </label>
-              <input type="submit" value="Hit the Trails!" className="button" />
+              </div>
+              <Button color="secondary" variant="outlined" sx={{margin: 3}} placeholder="Hit the Trails!" type="submit"> Hit the Trails! </Button>
       {error ? <label style={{ color: "red" }}>{error}</label> : ""}
           </form>
           

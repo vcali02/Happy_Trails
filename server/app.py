@@ -58,9 +58,10 @@ class Signup(Resource):
          new_adventurer = Adventurer(
              name = data.get('name'),
              username = data.get('username'),
-             email = data.get('email'),
-             bio = data.get('bio'),
-             image = data.get('image'))
+             email = data.get('email')
+            #  bio = data.get('bio'),
+            #  image = data.get('image')
+             )
          new_adventurer.password_hash = data.get('password')
          db.session.add(new_adventurer)
          db.session.commit()
@@ -73,17 +74,37 @@ api.add_resource(Signup, '/signup')
 class Login(Resource):
      def post(self):
         data = request.get_json()
-        adventurer = Adventurer.query.filter_by(username=data.get('username')).first()
+        try: 
+            user = Adventurer.query.filter_by(username=data.get('username')).first()
 
-        password = request.get_json()['password']
+    #if user.authenticate(data.get('password')):
+            password = request.get_json()['password']
 
-        if adventurer.authenticate(password):
-            login_user(adventurer, remember=True)
-            # session['adventurer_id'] = adventurer.id
-            return adventurer.to_dict(), 200
-        
-        return {'Invalid Credentials'}, 401
+            if user.authenticate(password):
+                login_user(user, remember=True)
+                # session['adventurer_id'] = adventurer.id
+                return user.to_dict(), 200
             
+        except Exception as e:
+            traceback.print_exc()
+            return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
+
+# class Login(Resource):
+#     def post(self):
+#         data = request.get_json()
+#         try:
+#             user = Adventurer.query.filter_by(username=data.get('username')).first()
+
+#             if user is not None and user.authenticate(data.get('password')):
+#                 login_user(user, remember=True)
+#                 return user.to_dict(), 200
+#             else:
+#                 return {"error": "Invalid username or password"}, 401
+
+#         except Exception as e:
+#             traceback.print_exc()
+#             return {"error": "An error occurred while logging in", "message": str(e)}, 500
+ 
 api.add_resource(Login, '/login')             
 
 # #-----LOGOUT------------#
@@ -104,8 +125,9 @@ class AuthorizeSession(Resource):
             #  adventurer = Adventurer.query.filter_by(
             #   id = session.get('adventurer_id')).first()
              return make_response(adventurer.to_dict(), 200)
-         except:
-             return make_response({}, 401)
+         except Exception as e:
+            traceback.print_exc()
+            return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
         
 api.add_resource(AuthorizeSession, '/authorize_session')
      
@@ -253,6 +275,23 @@ class HikedTrails(Resource):
             return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
 
 api.add_resource(HikedTrails, "/hiked_trails/<int:id>")
+
+@app.route('/hiked_trail', methods=["POST"])
+def addHikedTrail():
+    data = request.get_json()
+    try:
+        new_hiked_trail = HikedTrail(
+            date = data.get("date"),
+            trail_id = data.get("trail_id"),
+            adventurer_id = data.get("adventurer_id")
+        )
+        db.session.add(new_hiked_trail)
+        db.session.commit()
+
+        return make_response(new_hiked_trail.serialize, 201)
+    except Exception as e:
+            traceback.print_exc()
+            return {"error": "An error occurred while fetching the order history", "message": str(e)}, 500
 
 #----------------------SINGLE HIKED TRAIL--------------------------------#
 #GET /hiked_trails/<int:id>
