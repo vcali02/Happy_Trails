@@ -20,8 +20,10 @@ function TrailCard({ trail, adventurer, updateHikedTrails}) {
     const url = `/hiked_trails`
     const url2 = '/signup'
 
-    function handleHikes(e, id, adventurer){
-      fetch(`/api/hiked_trails`, {
+    function handleHikes(e, id){
+      console.log(adventurer.id)
+      console.log(id)
+      fetch(`/api/hiked_trail`, {
         method: 'POST',
         headers: {
           "content-type":"application/json"
@@ -33,8 +35,9 @@ function TrailCard({ trail, adventurer, updateHikedTrails}) {
       })
       
       .then(res => res.json())
-      .then(newTrail => updateHikedTrails(newTrail))
+      .then(data => console.log(data))
     }
+
 
     return (
       <Container className= "card-margin-top">
@@ -70,11 +73,11 @@ function TrailCard({ trail, adventurer, updateHikedTrails}) {
       <CardActions>
 {/* add ternary where if user is null, route to login page */}
       {adventurer ? 
-      <Button component={Link} to={url} onClick={(e) => handleHikes(e, id)}size="medium" color="primary" alt="Mark as hiked">
+      <Button onClick={(e) => handleHikes(e, id)}size="medium" color="primary" alt="Mark as hiked">
       <HikingIcon/> I hiked it!
     </Button>
     :
-    <Button component={Link} to={url2} size="medium" color="primary" alt="Mark as hiked">
+    <Button size="medium" color="primary" alt="Mark as hiked">
           <HikingIcon/> I hiked it!
         </Button>
     }

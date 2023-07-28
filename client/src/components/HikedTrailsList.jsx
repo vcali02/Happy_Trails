@@ -5,29 +5,21 @@ import { Typography } from '@mui/material'
 
 
 
-function HikedTrailsList({adventurer, updateHikedTrails, hikedTrails}) {
-  console.log(adventurer)
+function HikedTrailsList({hikedTrails}) {
 
-  
 
-  useEffect(() => {
-    getHikedTrails()
-  }, [])
-
-  function getHikedTrails(){
-    fetch(`/api/hiked_trails/${adventurer.id}`)
-    .then(res => res.json())
-    .then(hikedTrails => updateHikedTrails(hikedTrails))
-  }
-  console.log(hikedTrails)
-
- if (!adventurer){
-  return (
-    <div>Loading..</div>
-  )
- }
+//  if (!adventurer){
+//   return (
+//     <div>Loading..</div>
+//   )
+//  }
+console.log(hikedTrails)
+ const mapped_trail = [...hikedTrails].map(el => {
+    return <HikedTailCard key={el.id} trail={el}/>
+ })
+ console.log(mapped_trail)
  
- 
+//  {hikedTrails.map((trail) => <HikedTailCard key={trail.id} trail={trail}/>)}
 
   return (
       <>
@@ -35,7 +27,7 @@ function HikedTrailsList({adventurer, updateHikedTrails, hikedTrails}) {
       <Typography variant = 'h4'>You haven't added any hikes yet! </Typography>
       ):(  */}
         <div>
-          {hikedTrails.map((trail) => <HikedTailCard key={trail.id} trail={trail}/>)}
+          {mapped_trail}
         </div>
        
       </>

@@ -22,8 +22,13 @@ function App() {
 
   useEffect(() => {
     getTrails();
+    getHikedTrails();
+  }, [adventurer]);
+
+  useEffect(() => {
     getAdventurer();
   }, []);
+
 
   function getTrails() {
     fetch('/api/trails')
@@ -41,9 +46,24 @@ function App() {
 
   //get user's information - pass down to profile and to hiked_trails
 
-  function updateHikedTrails(newTrail){
-    setHikedTrails([...hikedTrails, newTrail])
+  
+  
+  
+  //if there IS an adventurer logged in, proceed
+  function getHikedTrails(){
+  if (adventurer != null) {
+    fetch(`/api/hiked_trails/${adventurer.id}`)
+    .then(res => res.json())
+    .then(hikedTrails => setHikedTrails(hikedTrails))
   }
+  
+}
+
+function updateHikedTrails(newTrail){
+  setHikedTrails([...hikedTrails, newTrail])
+}
+  
+  console.log(hikedTrails)
 
   function getAdventurer() {
     if (adventurer == null) {
