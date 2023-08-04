@@ -3,7 +3,7 @@
 ## User Stories:
 - User can make an account, log in, and log out.
 - Users can search for trails to hike based on location and user preferences.
-- User can marked trails as "Hiked"
+- User can mark trails as "Hiked"
 - Users can view information about each trail
 
 ## Tech Stack:
