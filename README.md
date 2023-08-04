@@ -39,7 +39,7 @@
 | /profile       | Profile.jsx    |
 
 ## Instructions
-1. Open two terminals
+Open two terminals and input commands below:
 ```
 #for backend
 $ cd server
