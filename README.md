@@ -38,4 +38,22 @@
 | /login         | loginForm.jsx  |
 | /profile       | Profile.jsx    |
 
+## Instructions
+1. Open two terminals
+```
+#for backend
+$ cd server
+$ pipenv install
+$ pipenv shell
+```
+
+```
+# for frontend
+$ cd client
+$ npm install
+$ npm run dev
+```
+
+
+
 
