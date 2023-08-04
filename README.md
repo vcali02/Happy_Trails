@@ -1,10 +1,10 @@
 # Happy_Trails
 
 ## User Stories:
+- User can make an account, log in, and log out.
 - Users can search for trails to hike based on location and user preferences.
-- User can rate trails they have hiked.
-- User can view previous trails and ratings.
-- View information about each trail
+- User can marked trails as "Hiked"
+- Users can view information about each trail
 
 ## Tech Stack:
 [![My Skills](https://skillicons.dev/icons?i=js,py,flask,react,vite,materialui)](https://skillicons.dev)
