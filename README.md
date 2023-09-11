@@ -9,6 +9,9 @@
 ## Tech Stack:
 [![My Skills](https://skillicons.dev/icons?i=js,py,flask,react,vite,materialui)](https://skillicons.dev)
 
+<image src="https://github.com/vcali02/Happy_Trails/assets/128323898/f05c901d-2f30-4e22-bfdc-06b8ad2f6c5b">
+
+
 ## Wireframe
 ![Screenshot 2023-07-26 at 12 42 21 PM](https://github.com/vcali02/Happy_Trails/assets/128323898/c5c4467b-86cf-4640-b9f5-f4f9137afbf3)
 
