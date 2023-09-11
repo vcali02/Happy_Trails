@@ -11,10 +11,6 @@
 
 <image src="https://github.com/vcali02/Happy_Trails/assets/128323898/f05c901d-2f30-4e22-bfdc-06b8ad2f6c5b">
 
-
-## Wireframe
-![Screenshot 2023-07-26 at 12 42 21 PM](https://github.com/vcali02/Happy_Trails/assets/128323898/c5c4467b-86cf-4640-b9f5-f4f9137afbf3)
-
 ## Schema
 <img src=https://github.com/vcali02/Happy_Trails/assets/128323898/a72f4373-620b-4fae-ad72-ca1f54dd9af3 width="600">
 
@@ -40,6 +36,10 @@
 | /safety        | Safety.jsx     |
 | /login         | loginForm.jsx  |
 | /profile       | Profile.jsx    |
+
+
+## Wireframe
+![Screenshot 2023-07-26 at 12 42 21 PM](https://github.com/vcali02/Happy_Trails/assets/128323898/c5c4467b-86cf-4640-b9f5-f4f9137afbf3)
 
 ## Instructions
 Open two terminals and input commands below:
